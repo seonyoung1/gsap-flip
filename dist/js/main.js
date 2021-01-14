@@ -1,4 +1,4 @@
-/*! Build Date: 2021. 1. 14. 오후 3:35:15 */
+/*! Build Date: 2021. 1. 14. 오후 3:59:54 */
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -43,9 +43,6 @@ window.script = function ($) {
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.delayedCall(current === 0 ? 3.5 : 1.5, event);
   };
 
-  var wrapper = $('.wrapper');
-  var box = $('.wrapper .text');
-
   var eventText = function eventText() {
     textAppend();
     $(window).on('resize', function () {
@@ -54,6 +51,7 @@ window.script = function ($) {
   };
 
   var textAppend = function textAppend() {
+    var box = $('.wrapper .text');
     var width = window.innerWidth;
     var current = 0;
 
@@ -75,7 +73,9 @@ window.script = function ($) {
     });
   };
 
-  eventText();
+  if ($('.wrapper').length > 0) {
+    eventText();
+  }
 
   if (text.length > 0) {
     gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.delayedCall(1, eventLetter);

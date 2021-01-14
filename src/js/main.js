@@ -24,9 +24,6 @@ window.script = (($) => {
 		gsap.delayedCall(current === 0 ? 3.5 : 1.5, event);
 	};
 
-	const wrapper = $('.wrapper');
-	const box = $('.wrapper .text');
-
 	const eventText = () => {
 		textAppend();
 		$(window).on('resize', () => {
@@ -35,6 +32,7 @@ window.script = (($) => {
 	};
 
 	const textAppend = () => {
+		const box = $('.wrapper .text');
 		let width = window.innerWidth;
 		let current = 0;
 		if (width > 1440) {
@@ -51,7 +49,9 @@ window.script = (($) => {
 		Flip.from(state, { duration: 0.8, ease: 'power1.inOut', scale: true });
 	};
 
-	eventText();
+	if ($('.wrapper').length > 0) {
+		eventText();
+	}
 
 	if (text.length > 0) {
 		gsap.delayedCall(1, eventLetter);
