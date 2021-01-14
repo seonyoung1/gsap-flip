@@ -1,4 +1,4 @@
-/*! Build Date: 2021. 1. 14. 오후 3:59:54 */
+/*! Build Date: 2021. 1. 14. 오후 8:37:02 */
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -21,27 +21,30 @@ __webpack_require__.r(__webpack_exports__);
 window.script = function ($) {
   gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.registerPlugin(gsap_Flip__WEBPACK_IMPORTED_MODULE_2__.Flip);
   var text = $('.container');
+  var letterCurrent = 0;
 
   var eventLetter = function eventLetter() {
     var layouts = ['code1', 'code2', 'code3'];
-    var current = 0;
     var state = gsap_Flip__WEBPACK_IMPORTED_MODULE_2__.Flip.getState('.letter', {
       props: 'color,backgroundColor',
       simple: true
     });
-    text.removeClass(layouts[current]);
-    current = (current + 1) % layouts.length;
-    text.addClass(layouts[current]);
+    text.removeClass(layouts[letterCurrent]);
+    letterCurrent = (letterCurrent + 1) % layouts.length;
+    text.addClass(layouts[letterCurrent]);
     gsap_Flip__WEBPACK_IMPORTED_MODULE_2__.Flip.from(state, {
       absolute: true,
       duration: 0.5,
       stagger: 0.1,
       ease: 'power1.inOut',
       simple: true,
-      spin: current === 2
+      spin: letterCurrent === 2
     });
-    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.delayedCall(current === 0 ? 3.5 : 1.5, event);
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.delayedCall(letterCurrent === 0 ? 3.5 : 1.5, eventLetter);
   };
+
+  var wrapper = $('.wrapper');
+  var box = $('.wrapper .text');
 
   var eventText = function eventText() {
     textAppend();
@@ -51,7 +54,6 @@ window.script = function ($) {
   };
 
   var textAppend = function textAppend() {
-    var box = $('.wrapper .text');
     var width = window.innerWidth;
     var current = 0;
 
@@ -73,7 +75,7 @@ window.script = function ($) {
     });
   };
 
-  if ($('.wrapper').length > 0) {
+  if (wrapper.length > 0) {
     eventText();
   }
 

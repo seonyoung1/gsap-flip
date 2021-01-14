@@ -5,24 +5,27 @@ import { Flip } from 'gsap/Flip';
 window.script = (($) => {
 	gsap.registerPlugin(Flip);
 	const text = $('.container');
+	let letterCurrent = 0;
 
 	const eventLetter = () => {
 		const layouts = ['code1', 'code2', 'code3'];
-		let current = 0;
 		const state = Flip.getState('.letter', { props: 'color,backgroundColor', simple: true });
-		text.removeClass(layouts[current]);
-		current = (current + 1) % layouts.length;
-		text.addClass(layouts[current]);
+		text.removeClass(layouts[letterCurrent]);
+		letterCurrent = (letterCurrent + 1) % layouts.length;
+		text.addClass(layouts[letterCurrent]);
 		Flip.from(state, {
 			absolute: true,
 			duration: 0.5,
 			stagger: 0.1,
 			ease: 'power1.inOut',
 			simple: true,
-			spin: current === 2,
+			spin: letterCurrent === 2,
 		});
-		gsap.delayedCall(current === 0 ? 3.5 : 1.5, event);
+		gsap.delayedCall(letterCurrent === 0 ? 3.5 : 1.5, eventLetter);
 	};
+
+	const wrapper = $('.wrapper');
+	const box = $('.wrapper .text');
 
 	const eventText = () => {
 		textAppend();
@@ -32,7 +35,6 @@ window.script = (($) => {
 	};
 
 	const textAppend = () => {
-		const box = $('.wrapper .text');
 		let width = window.innerWidth;
 		let current = 0;
 		if (width > 1440) {
@@ -49,7 +51,7 @@ window.script = (($) => {
 		Flip.from(state, { duration: 0.8, ease: 'power1.inOut', scale: true });
 	};
 
-	if ($('.wrapper').length > 0) {
+	if( wrapper.length > 0 ){
 		eventText();
 	}
 
